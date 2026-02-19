@@ -1,0 +1,84 @@
+endpoints:
+  check:
+    transport: grpc
+    grpc_method: kessel.inventory.v1beta2.KesselInventoryService.Check
+    scenarios:
+      default:
+        expected_mode:
+          enabled: at_least_as_acknowledged
+          disabled: minimize_latency
+        expected_log:
+          enabled: Default consistency - looking up token from DB
+          disabled: Default consistency - using minimize_latency
+      fresh:
+        expected_mode: at_least_as_fresh
+        expected_log: Using at_least_as_fresh consistency
+      acknowledged:
+        expected_mode: at_least_as_acknowledged
+        expected_log: Using at_least_as_acknowledged consistency - looking up token from DB
+      minimize:
+        expected_mode: minimize_latency
+        expected_log: Using minimize_latency consistency
+
+  checkself:
+    transport: http
+    http_path: /api/kessel/v1beta2/checkself
+    scenarios:
+      default:
+        expected_mode: minimize_latency
+        expected_log: Unspecified consistency for CheckSelf - using minimize_latency
+      fresh:
+        expected_mode: at_least_as_fresh
+        expected_log: Using at_least_as_fresh consistency
+      acknowledged:
+        expected_mode: at_least_as_acknowledged
+        expected_log: Using at_least_as_acknowledged consistency - looking up token from DB
+      minimize:
+        expected_mode: minimize_latency
+        expected_log: Using minimize_latency consistency
+
+  checkbulk:
+    transport: grpc
+    grpc_method: kessel.inventory.v1beta2.KesselInventoryService.CheckBulk
+    scenarios:
+      default:
+        expected_mode: minimize_latency
+      fresh:
+        expected_mode: at_least_as_fresh
+      acknowledged:
+        expected_mode: unsupported_ack
+      minimize:
+        expected_mode: minimize_latency
+
+  checkbulkself:
+    transport: http
+    http_path: /api/kessel/v1beta2/checkselfbulk
+    scenarios:
+      default:
+        expected_mode: minimize_latency
+      fresh:
+        expected_mode: at_least_as_fresh
+      acknowledged:
+        expected_mode: unsupported_ack
+      minimize:
+        expected_mode: minimize_latency
+
+  streamedlistobjects:
+    transport: grpc
+    grpc_method: kessel.inventory.v1beta2.KesselInventoryService.StreamedListObjects
+    scenarios:
+      default:
+        expected_mode: minimize_latency
+      fresh:
+        expected_mode: at_least_as_fresh
+      acknowledged:
+        expected_mode: unsupported_ack
+      minimize:
+        expected_mode: minimize_latency
+
+  checkforupdate:
+    transport: grpc
+    grpc_method: kessel.inventory.v1beta2.KesselInventoryService.CheckForUpdate
+    scenarios:
+      default:
+        expected_mode: minimize_latency
