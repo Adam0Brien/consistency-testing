@@ -13,7 +13,7 @@ relations api
 ```
 make relations-api-up
 ```
-incentory-consumer
+inventory-consumer
 ```
 make inventory-consumer-up
 ```
