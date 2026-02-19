@@ -26,7 +26,7 @@ endpoints:
     scenarios:
       default:
         expected_mode: minimize_latency
-        expected_log: Unspecified consistency for CheckSelf - using minimize_latency
+        expected_log: Default consistency - using minimize_latency
       fresh:
         expected_mode: at_least_as_fresh
         expected_log: Using at_least_as_fresh consistency
